@@ -1,3 +1,52 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "dog1",
+      "description": "Golden Retriever looking happy",
+      "imageUrl": "https://images.unsplash.com/photo-1633722715463-d30f4f325e24?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnb2xkZW4lMjByZXRyaWV2ZXJ8ZW58MHx8fHwxNzYzNDc3MzQyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "golden retriever"
+    },
+    {
+      "id": "dog2",
+      "description": "A small scruffy terrier mix",
+      "imageUrl": "https://images.unsplash.com/photo-1725394953800-cd68713d5df6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0ZXJyaWVyJTIwZG9nfGVufDB8fHx8MTc2MzQ4NjczMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "terrier dog"
+    },
+    {
+      "id": "cat1",
+      "description": "A fluffy ginger cat",
+      "imageUrl": "https://images.unsplash.com/photo-1586164383881-d01525b539d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnaW5nZXIlMjBjYXR8ZW58MHx8fHwxNzYzNDU1Mzg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ginger cat"
+    },
+    {
+      "id": "cat2",
+      "description": "A sleek black cat with green eyes",
+      "imageUrl": "https://images.unsplash.com/photo-1503431128871-cd250803fa41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMGNhdHxlbnwwfHx8fDE3NjM0OTQ3MDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "black cat"
+    },
+    {
+      "id": "dog3",
+      "description": "A german shepherd puppy",
+      "imageUrl": "https://images.unsplash.com/photo-1649923625793-af1cbd33c8bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxnZXJtYW4lMjBzaGVwaGVyZHxlbnwwfHx8fDE3NjM0NTc5MjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "german shepherd"
+    },
+    {
+      "id": "cat3",
+      "description": "A siamese cat looking at the camera",
+      "imageUrl": "https://images.unsplash.com/photo-1611668070024-4b53a3908386?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzaWFtZXNlJTIwY2F0fGVufDB8fHx8MTc2MzQ4NjczMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "siamese cat"
+    },
+    {
+      "id": "dog4",
+      "description": "A friendly-looking labrador",
+      "imageUrl": "https://images.unsplash.com/photo-1672838563466-bf207c8666fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsYWJyYWRvciUyMGRvZ3xlbnwwfHx8fDE3NjMzOTQyMDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "labrador dog"
+    },
+    {
+      "id": "cat4",
+      "description": "A tabby cat sitting on a fence",
+      "imageUrl": "https://images.unsplash.com/photo-1695740666652-9369b8c3da28?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0YWJieSUyMGNhdHxlbnwwfHx8fDE3NjM0ODY3MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tabby cat"
+    }
+  ]
 }
