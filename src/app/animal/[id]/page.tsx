@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { MapPin, Phone, User, Mail, Calendar, PawPrint, Share2 } from 'lucide-react';
+import { MapPin, Phone, User, Mail, Calendar, PawPrint, Share2, ShieldCheck, Home } from 'lucide-react';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { ShareButton } from './share-button';
 
@@ -29,11 +29,14 @@ export async function generateMetadata(
     };
   }
   
-  const title = animal.status === 'Perdido' ? `Perdido: ${animal.name || animal.breed}` : `Encontrado: ${animal.name || animal.breed}`
+  let title = `Perfil de: ${animal.name || animal.breed}`;
+  if(animal.status === 'Perdido') title = `Perdido: ${animal.name || animal.breed}`;
+  if(animal.status === 'Encontrado') title = `Encontrado: ${animal.name || animal.breed}`;
+
 
   return {
     title: `${title} | RaulFind`,
-    description: `Detalhes sobre ${animal.name || animal.breed}, um animal ${animal.status.toLowerCase()} em Raul Soares, MG.`,
+    description: `Detalhes sobre ${animal.name || animal.breed}, um animal em Raul Soares, MG.`,
   };
 }
 
@@ -47,6 +50,19 @@ export default function AnimalProfilePage({ params }: Props) {
 
   const owner = animal.ownerId ? getOwnerById(animal.ownerId) : null;
   const image = getPlaceholderImage(animal.image);
+  
+  const getBadgeVariant = () => {
+    switch (animal.status) {
+      case 'Perdido':
+        return 'destructive';
+      case 'Encontrado':
+        return 'default';
+      case 'Com Dono':
+        return 'secondary';
+      default:
+        return 'outline';
+    }
+  };
 
   return (
     <div className="container mx-auto max-w-5xl py-12 px-4">
@@ -65,9 +81,9 @@ export default function AnimalProfilePage({ params }: Props) {
             )}
             <Badge
               className="absolute top-4 right-4 text-sm px-3 py-1"
-              variant={animal.status === 'Perdido' ? 'destructive' : 'default'}
+              variant={getBadgeVariant()}
             >
-              {animal.status}
+              {animal.status === 'Com Dono' ? 'Seguro em Casa' : animal.status}
             </Badge>
           </div>
           <ShareButton />
@@ -75,30 +91,25 @@ export default function AnimalProfilePage({ params }: Props) {
        
         <div className="space-y-6">
           <div className="space-y-2">
-             <h1 className="text-4xl font-bold font-headline">{animal.name || animal.breed}</h1>
-             <p className="text-muted-foreground text-lg">{animal.species} • {animal.color} • Porte {animal.size}</p>
+             <h1 className="text-4xl font-bold font-headline">{animal.name || 'Animal sem nome'}</h1>
+             <p className="text-muted-foreground text-lg">{animal.species} • {animal.breed} • {animal.color} • Porte {animal.size}</p>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><PawPrint className="text-primary"/> Informações</CardTitle>
+              <CardTitle className="flex items-center gap-2"><PawPrint className="text-primary"/> Informações do Animal</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-muted-foreground">
               <p><strong className="text-foreground">Raça:</strong> {animal.breed}</p>
               <p><strong className="text-foreground">Cor:</strong> {animal.color}</p>
               <p><strong className="text-foreground">Porte:</strong> {animal.size}</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><MapPin className="text-primary"/> Última Localização</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <p className="text-muted-foreground">{animal.locationFound}</p>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Calendar className="h-4 w-4"/>
-                <span>Data: {new Date(animal.dateFound).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</span>
+              <div className="flex items-center gap-2 pt-2">
+                  <MapPin className="h-4 w-4 text-primary"/>
+                  <span>Vive em/Visto por último em: {animal.locationFound}</span>
+              </div>
+               <div className="flex items-center gap-2 text-sm">
+                <Calendar className="h-4 w-4 text-primary"/>
+                <span>Data do Registro/Evento: {new Date(animal.dateFound).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</span>
               </div>
             </CardContent>
           </Card>
@@ -117,14 +128,40 @@ export default function AnimalProfilePage({ params }: Props) {
             </Card>
           )}
 
-           {animal.status === 'Encontrado' && !owner && (
+           {animal.status === 'Encontrado' && (
               <Card className="bg-accent/50 border-accent">
                  <CardHeader>
                   <CardTitle>Você encontrou este animal?</CardTitle>
                  </CardHeader>
                  <CardContent>
                     <p className="text-accent-foreground">
-                      Se você é o dono ou conhece o dono, por favor entre em contato com quem o encontrou. Informações de contato do znalazca serão adicionadas em breve.
+                      Este animal foi encontrado. Se você é o dono ou conhece o dono, por favor entre em contato usando as informações acima.
+                    </p>
+                 </CardContent>
+              </Card>
+           )}
+           
+            {animal.status === 'Perdido' && (
+              <Card className="bg-destructive/10 border-destructive">
+                 <CardHeader>
+                  <CardTitle>Ajude a encontrar este animal!</CardTitle>
+                 </CardHeader>
+                 <CardContent>
+                    <p className="text-destructive-foreground/80">
+                      Este animal está perdido. Se você o viu, por favor entre em contato com o dono usando as informações de contato acima.
+                    </p>
+                 </CardContent>
+              </Card>
+           )}
+
+            {animal.status === 'Com Dono' && (
+              <Card className="bg-green-100 dark:bg-green-900/50 border-green-500">
+                 <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-green-800 dark:text-green-300"><ShieldCheck /> Animal Identificado</CardTitle>
+                 </CardHeader>
+                 <CardContent>
+                    <p className="text-green-700 dark:text-green-400">
+                      Este animal tem um lar! Se você o encontrou, por favor use os contatos do dono para avisá-lo.
                     </p>
                  </CardContent>
               </Card>

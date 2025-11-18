@@ -12,12 +12,9 @@ export default function Header() {
         </Link>
         <nav className="flex items-center gap-4 text-sm ml-auto">
           <Link href="/register-animal">
-            <Button variant="ghost">Cadastrar Animal</Button>
-          </Link>
-          <Link href="/register-owner">
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Sou Dono(a)
+              Cadastrar Animal
             </Button>
           </Link>
         </nav>

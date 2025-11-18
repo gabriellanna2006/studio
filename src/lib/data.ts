@@ -18,7 +18,7 @@ const owners: Owner[] = [
   },
 ];
 
-const animals: Animal[] = [
+let animals: Animal[] = [
   {
     id: 'animal1',
     name: 'Max',
@@ -111,4 +111,36 @@ export function getOwnerById(id: string): Owner | undefined {
 
 export function getPlaceholderImage(id: string) {
   return PlaceHolderImages.find((img) => img.id === id);
+}
+
+
+type NewAnimalData = Omit<Animal, 'id' | 'ownerId' | 'dateFound'> & {
+  owner: Omit<Owner, 'id'>
+}
+
+export function addAnimal(data: NewAnimalData): Animal {
+  const newOwnerId = `owner${owners.length + 1}`;
+  const newOwner: Owner = {
+    id: newOwnerId,
+    ...data.owner
+  };
+  owners.push(newOwner);
+
+  const newAnimalId = `animal${animals.length + 1}`;
+  const newAnimal: Animal = {
+    id: newAnimalId,
+    name: data.name,
+    species: data.species,
+    breed: data.breed,
+    color: data.color,
+    size: data.size,
+    locationFound: data.locationFound,
+    dateFound: new Date().toISOString().split('T')[0],
+    image: data.image,
+    ownerId: newOwnerId,
+    status: data.status,
+  };
+  animals.push(newAnimal);
+  
+  return newAnimal;
 }
